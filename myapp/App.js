@@ -1,6 +1,6 @@
-import{SafeAreaView, View,Image, Text, TouchableOpacity, TextInput} from 'react-native';
+import{SafeAreaView, View,Image, Text, TouchableOpacity, TextInput,FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {categories} from './mockData/categories';
 
 export default function App() {
   return (
@@ -79,6 +79,51 @@ export default function App() {
         </View>
       </View>
        {/*And ends here*/}
+
+       {/*Third component starts here*/}
+        <View style={{gap:10,
+          width:380,
+          height:75,
+          top:44,}}>
+          <Text style={{fontSize: 20, fontWeight: 700, left: 2,}}>Categories</Text>
+        </View>
+        
+        <FlatList style={{
+          width:380,
+          height:192,}}
+          
+          data={categories}
+          
+          renderItem={({item})=> (
+            <View style={{
+              display: 'flex',
+              backgroundColor:"white",
+              marginRight: 13,
+              borderRadius: 15,
+              width:186,
+              height: 195,
+              }}>
+              <View style={{width: 78,
+                height:37,
+                top:10,
+                left:15,}}>
+                <Text style={{fontWeight:'bold',
+                  fontSize: 16,}}> {item.name}</Text>
+                <Text style={{fontSize:12,}}> {item.details}</Text>
+
+                <View>
+                  <View style={{alignItems: 'center', width: 151,
+                    height: 132, top: 0, left: 18,}}>
+                    <Image source={item.photo}/>
+                  </View>
+                </View>
+              </View>
+            </View>
+          )}
+            keyExtractor={(item) => item.id}
+            horizontal
+            showHorizontalScrollIndicator={false}
+        />
     </View>
   </SafeAreaView>
   )
